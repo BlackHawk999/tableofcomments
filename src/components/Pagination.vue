@@ -46,17 +46,17 @@ import { defineProps, computed, defineEmits } from 'vue'
       return props.currentPage - 1;
     })
     const endPage= computed(() => {
-      Math.min(
+      return Math.min(
         startPage.value + props.maxVisibleButtons - 1,
         props.totalPages
       );
     })
     const pages = computed(() => {
       const range = [];
-      for (let i = startPage; i <= endPage; i += 1) {
+      for (let i = startPage.value; i <= endPage.value; i++) {
         range.push({
           name: i,
-          isDisabled: i.value === props.currentPage,
+          isDisabled: i === props.currentPage,
         });
       }
       return range;

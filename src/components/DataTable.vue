@@ -3,7 +3,7 @@ import { defineProps, ref, defineEmits } from 'vue'
 import { PropType } from "vue"
   const props = defineProps({
     tHead: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<object[]>,
       require: true,
     },
     tBody: {

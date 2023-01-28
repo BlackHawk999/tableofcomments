@@ -49,6 +49,10 @@
     currentPage.value = page;
   }
 
+  const computedPages = computed(() => {
+    return Math.ceil(commentsStore.comments.length/limit.value)
+  })
+
   onMounted(() => {
     commentsStore.getAllComments()
   })
@@ -60,16 +64,19 @@
     <data-table
       :tHead="tableHead"
       :tBody="computedComments"
-      :current-page="currentPage"
+      :currentPage="currentPage"
       :limit="limit"
       @table:sort="sortComments"
     />
     <pagination
       :currentPage="currentPage"
-      :totalPages="Math.ceil(comments.length/limit)"
-      :total="comments.length"
+      :totalPages="computedPages"
+      :total="commentsStore.comments.length"
       @pagechanged="onPageChange"
     />
+    <pre>{{ commentsStore.comments.length }}</pre>
+    <pre>{{ limit }}</pre>
+    <pre>{{ currentPage }}</pre>
   </div>
 </template>
 
