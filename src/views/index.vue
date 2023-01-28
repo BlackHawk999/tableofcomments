@@ -45,12 +45,12 @@
   }
   
   function onPageChange(page) {
+    console.log('page: ', page) 
     currentPage.value = page;
   }
 
   onMounted(() => {
     commentsStore.getAllComments()
-    const id = route.params.id
   })
 </script>
 
@@ -65,8 +65,8 @@
       @table:sort="sortComments"
     />
     <pagination
-      :current-page="currentPage"
-      :total-pages="Math.ceil(comments.length/limit)"
+      :currentPage="currentPage"
+      :totalPages="Math.ceil(comments.length/limit)"
       :total="comments.length"
       @pagechanged="onPageChange"
     />

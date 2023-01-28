@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { defineProps, ref, defineEmits } from 'vue'
+import { PropType } from "vue"
   const props = defineProps({
     tHead: {
-      type: Array,
+      type: Array as PropType<string[]>,
       require: true,
     },
     tBody: {
-      type: Array,
+      type: Array as PropType<object[]>,
       require: true,
     },
     limit: {
@@ -65,7 +66,7 @@ import { defineProps, ref, defineEmits } from 'vue'
     <table class="comments-table" cellspacing="0" cellpadding="0">
       <thead class="comments-table-head">
         <tr>
-          <th v-for="(item, idx) in tHead" :key="idx" class="num">
+          <th v-for="(item, idx) in props.tHead" :key="idx" class="num">
             <div class="th-content">
               <span>{{ item.text }}</span>
               <img
@@ -82,7 +83,7 @@ import { defineProps, ref, defineEmits } from 'vue'
       <tbody class="comments-table-body" v-if="tBody?.length">
         <tr
           @click="openComment(info.id)"
-          v-for="(info, idx) in tBody"
+          v-for="(info, idx) in props.tBody"
           :key="info.id"
         >
           <td class="tbody-edit">

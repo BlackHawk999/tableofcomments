@@ -21,14 +21,8 @@ import { defineProps, computed, defineEmits } from 'vue'
   })
   const emit = defineEmits(['pagechanged'])
 
-    function onClickFirstPage () {
-      emit("pagechanged", 1);
-    }
     function previousPage () {
       emit("pagechanged", props.currentPage - 1);
-    }
-    function onClickPage (page) {
-      emit("pagechanged", page);
     }
     function nextPage () {
       emit("pagechanged", props.currentPage + 1);
@@ -38,7 +32,9 @@ import { defineProps, computed, defineEmits } from 'vue'
     }
 
     const isInLastPage = computed(() => {
-      props.currentPage === props.totalPages;
+      props.currentPage < props.totalPages;
+      console.log('total-pages: ', props.totalPages);
+      
     })
     const startPage = computed (() => {
       if (props.currentPage === 1) {
@@ -78,7 +74,7 @@ import { defineProps, computed, defineEmits } from 'vue'
     </button>
     <p
       v-for="(page, idx) in pages"
-      :key="idx"
+      :key="idx + 1"
       :class="{ active: isPageActive(page.name) }"
     >
       {{ page.name }}
